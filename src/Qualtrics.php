@@ -44,7 +44,7 @@ class Qualtrics {
    * @var string $endpoint
    *   The REST API endpoint.
    */
-  protected $endpoint = 'https://co1.qualtrics.com/API/v3';
+  protected $endpoint;
 
   /**
    * @var string $api_key
@@ -78,9 +78,11 @@ class Qualtrics {
    * @param int $timeout
    *   Maximum request time in seconds.
    */
-  public function __construct($api_key, $api_user, $timeout = 10) {
+  public function __construct($api_key, $api_user, $timeout = 10, $data_center_id = 'col1') {
     $this->api_key = $api_key;
     $this->api_user = $api_user;
+
+    $this->endpoint = 'https://'.$data_center_id.'.qualtrics.com/API/v3';
 
     $this->client = new Client([
       'timeout' => $timeout,
